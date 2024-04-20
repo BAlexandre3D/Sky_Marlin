@@ -54,7 +54,7 @@
 //
 // Servos
 //
-#define SERVO0_PIN                          PA1
+//#define SERVO0_PIN                          PA1
 #define SERVO1_PIN                          PC9
 
 //
@@ -64,8 +64,8 @@
 #define Y_DIAG_PIN                          PE12  // Y-
 #define Z_DIAG_PIN                          PG8   // Z-
 #define E0_DIAG_PIN                         PE15  // E0
-#define E1_DIAG_PIN                         PE10  // E1
-#define E2_DIAG_PIN                         PG5   // E2
+#define Z2_DIAG_PIN                         PE10  // E1
+#define Z3_DIAG_PIN                         PG5   // E2  // E2
 
 //
 // Limit Switches
@@ -164,23 +164,24 @@
   #define E0_CS_PIN                         PB3
 #endif
 
-#define E1_STEP_PIN                         PD15
-#define E1_DIR_PIN                          PE7
-#define E1_ENABLE_PIN                       PA3
-#ifndef E1_CS_PIN
-  #define E1_CS_PIN                         PG15
+#define Z2_STEP_PIN                         PD15
+#define Z2_DIR_PIN                          PE7
+#define Z2_ENABLE_PIN                       PA3
+#ifndef Z2_CS_PIN
+  #define Z2_CS_PIN                         PG15
 #endif
 
-#define E2_STEP_PIN                         PD13
-#define E2_DIR_PIN                          PG9
-#define E2_ENABLE_PIN                       PF0
-#ifndef E2_CS_PIN
-  #define E2_CS_PIN                         PG12
+#define Z3_STEP_PIN                         PD13
+#define Z3_DIR_PIN                          PG9
+#define Z3_ENABLE_PIN                       PF0
+#ifndef Z3_CS_PIN
+  #define Z3_CS_PIN                         PG12
 #endif
 
 //
 // SPI pins for TMC2130 stepper drivers
 //
+#if ENABLED(TMC_USE_SW_SPI)
 #ifndef TMC_SPI_MOSI
   #define TMC_SPI_MOSI                      PC12
 #endif
@@ -189,6 +190,7 @@
 #endif
 #ifndef TMC_SPI_SCK
   #define TMC_SPI_SCK                       PC10
+#endif
 #endif
 
 #if HAS_TMC_UART
@@ -222,11 +224,11 @@
   #define E0_SERIAL_TX_PIN                  PD4
   #define E0_SERIAL_RX_PIN      E0_SERIAL_TX_PIN
 
-  #define E1_SERIAL_TX_PIN                  PD1
-  #define E1_SERIAL_RX_PIN      E1_SERIAL_TX_PIN
+  #define Z2_SERIAL_TX_PIN                  PD1
+  #define Z2_SERIAL_RX_PIN      Z2_SERIAL_TX_PIN
 
-  #define E2_SERIAL_TX_PIN                  PD6
-  #define E2_SERIAL_RX_PIN      E2_SERIAL_TX_PIN
+  #define Z3_SERIAL_TX_PIN                  PD6
+  #define Z3_SERIAL_RX_PIN      Z3_SERIAL_TX_PIN
 
   // Reduce baud rate to improve software serial reliability
   #ifndef TMC_BAUD_RATE
@@ -299,11 +301,11 @@
 //
 // Fans
 //
-#define FAN0_PIN                            PC8   // Fan0
-#define FAN1_PIN                            PE5   // Fan1
+#define E0_AUTO_FAN_PIN                    PC8   // Fan0
+#define FAN0_PIN                            PE5   // Fan1
 
 #ifndef E0_AUTO_FAN_PIN
-  #define E0_AUTO_FAN_PIN               FAN1_PIN
+  #define E0_AUTO_FAN_PIN               FAN0_PIN
 #endif
 
 #if !defined(CONTROLLER_FAN_PIN) && ENABLED(USE_CONTROLLER_FAN) && HOTENDS < 2
@@ -540,7 +542,8 @@
     #endif
 
   #endif
-
+#define LCD_CONTRAST_DEFAULT                 255
+#define LCD_SCREEN_ROTATE                      0
 #endif // HAS_WIRED_LCD
 
 // Alter timing for graphical display
