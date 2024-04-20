@@ -2123,6 +2123,7 @@ void prepare_line_to_destination() {
     //
     #if HOMING_Z_WITH_PROBE
       if (axis == Z_AXIS) {
+        delay(500);
         if (TERN0(BLTOUCH, bltouch.deploy())) return;   // BLTouch was deployed above, but get the alarm state.
         if (TERN0(PROBE_TARE, probe.tare())) return;
         TERN_(BD_SENSOR, bdl.config_state = BDS_HOMING_Z);
