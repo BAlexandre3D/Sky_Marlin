@@ -110,7 +110,7 @@
 // Z Probe must be this pin
 //
 #ifndef Z_MIN_PROBE_PIN
-  #define Z_MIN_PROBE_PIN                   PA2
+  #define Z_MIN_PROBE_PIN                   PF6
 #endif
 
 //
@@ -543,7 +543,7 @@
 
   #endif
 #define LCD_CONTRAST_DEFAULT                 255
-#define LCD_SCREEN_ROTATE                      0
+#define LCD_SCREEN_ROTATE                    180
 #endif // HAS_WIRED_LCD
 
 // Alter timing for graphical display
