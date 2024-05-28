@@ -245,6 +245,21 @@ void GcodeSuite::M115() {
     // CONFIG_EXPORT
     cap_line(F("CONFIG_EXPORT"), ENABLED(CONFIGURATION_EMBEDDING));
 
+        // FSR_PROBING
+    cap_line(F("FSR_PROBING"), ENABLED(HAS_FSR) || ENABLED(HAS_Z_MIN_ADC));
+
+    // SINGLE_NOZZLE
+    cap_line(F("SINGLE_NOZZLE"), ENABLED(SINGLENOZZLE));
+
+    // DIRECT_DRIVE
+    cap_line(F("DIRECT_DRIVE"), TERN(ADVANCED_PAUSE_FEATURE, FILAMENT_CHANGE_UNLOAD_LENGTH <= 100, 0));
+
+    // HEATED_BED
+    cap_line(F("HEATED_BED"), ENABLED(HAS_HEATED_BED));
+
+    // DELTA
+    cap_line(F("DELTA"), ENABLED(DELTA));
+
     // Machine Geometry
     #if ENABLED(M115_GEOMETRY_REPORT)
       constexpr xyz_pos_t bmin{0},
@@ -292,6 +307,17 @@ void GcodeSuite::M115() {
             "}" // max
           "}" // work
         "}" // area
+      );
+    #endif
+    // Temperatures
+    #if ENABLED(M115_TEMP_REPORT)
+      SERIAL_ECHOLNPGM(
+        "max_temperatures:{"
+          "t0:{min:", HEATER_0_MINTEMP, ",max:", (HEATER_0_MAXTEMP - HOTEND_OVERSHOOT), "}"
+          #if TEMP_SENSOR_BED
+          ",bed:{min:", BED_MINTEMP, ",max:", (BED_MAXTEMP - BED_OVERSHOOT), "}"
+          #endif
+        "}"
       );
     #endif
 
