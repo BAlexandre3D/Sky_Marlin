@@ -1261,7 +1261,7 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 6000, 6000, 200, 10000 }
+#define DEFAULT_MAX_ACCELERATION      { 8000, 8000, 200, 10000 }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -1276,7 +1276,7 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          5000    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
 #define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
 
@@ -1581,7 +1581,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { -50, -20, -1.05 }
+#define NOZZLE_TO_PROBE_OFFSET { -50, -20, -0.95 }
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
@@ -1594,7 +1594,7 @@
 #define PROBING_MARGIN 45
 
 // X and Y axis travel speed (mm/min) between probes
-#define XY_PROBE_FEEDRATE 15000
+#define XY_PROBE_FEEDRATE 18000
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
 #define Z_PROBE_FEEDRATE_FAST (40*60/4)
@@ -1696,7 +1696,7 @@
  * These options are most useful for the BLTouch probe, but may also improve
  * readings with inductive probes and piezo sensors.
  */
-#define PROBING_HEATERS_OFF       // Turn heaters off when probing
+//#define PROBING_HEATERS_OFF       // Turn heaters off when probing
 #if ENABLED(PROBING_HEATERS_OFF)
   //#define WAIT_FOR_BED_HEATER     // Wait for bed to heat back up between probes (to improve accuracy)
   //#define WAIT_FOR_HOTEND         // Wait for hotend to heat back up between probes (to improve accuracy & prevent cold extrude)
@@ -1787,7 +1787,7 @@
                                       // You'll need this much clearance above Z_MAX_POS to avoid grinding.
 
 #define Z_AFTER_HOMING         10   // (mm) Height to move to after homing (if Z was homed)
-#define XY_AFTER_HOMING { 10, Y_MAX_POS-10 }  // (mm) Move to an XY position after homing (and raising Z)
+#define XY_AFTER_HOMING { 0, Y_MAX_POS-10 }  // (mm) Move to an XY position after homing (and raising Z)
 
 //#define EVENT_GCODE_AFTER_HOMING "M300 P440 S200"  // Commands to run after G28 (and move to XY_AFTER_HOMING)
 
@@ -1821,14 +1821,14 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 308
-#define Y_BED_SIZE 325
+#define X_BED_SIZE 300
+#define Y_BED_SIZE 301
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
-#define X_MIN_POS -20
-#define Y_MIN_POS 0
+#define X_MIN_POS -27
+#define Y_MIN_POS -23
 #define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE+20
+#define X_MAX_POS (X_BED_SIZE + 28)
 #define Y_MAX_POS Y_BED_SIZE
 #define Z_MAX_POS 350
 //#define I_MIN_POS 0
@@ -1950,7 +1950,7 @@
   // After a runout is detected, continue printing this length of filament
   // before executing the runout script. Useful for a sensor at the end of
   // a feed tube. Requires 4 bytes SRAM per sensor, plus 4 bytes overhead.
-  //#define FILAMENT_RUNOUT_DISTANCE_MM 25
+  #define FILAMENT_RUNOUT_DISTANCE_MM 500
 
   #ifdef FILAMENT_RUNOUT_DISTANCE_MM
     // Enable this option to use an encoder disc that toggles the runout pin
@@ -2482,18 +2482,18 @@
   #define NOZZLE_CLEAN_PATTERN_CIRCLE   // Provide 'G12 P2' - a circular cleaning pattern
 
   // Default pattern to use when 'P' is not provided to G12. One of the enabled options above.
-  #define NOZZLE_CLEAN_DEFAULT_PATTERN 0
+  #define NOZZLE_CLEAN_DEFAULT_PATTERN 1
 
   #define NOZZLE_CLEAN_STROKES     12   // Default number of pattern repetitions
 
   #if ENABLED(NOZZLE_CLEAN_PATTERN_ZIGZAG)
-    #define NOZZLE_CLEAN_TRIANGLES  3   // Default number of triangles
+    #define NOZZLE_CLEAN_TRIANGLES  5   // Default number of triangles
   #endif
 
   // Specify positions for each tool as { { X, Y, Z }, { X, Y, Z } }
   // Dual hotend system may use { {  -20, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) },  {  420, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) }}
-  #define NOZZLE_CLEAN_START_POINT { {  30, 30, (Z_MIN_POS + 1) } }
-  #define NOZZLE_CLEAN_END_POINT   { { 100, 60, (Z_MIN_POS + 1) } }
+  #define NOZZLE_CLEAN_START_POINT { {  245, -22, (Z_MIN_POS + 6.5) } }
+  #define NOZZLE_CLEAN_END_POINT   { { 290, -22, (Z_MIN_POS + 6.5) } }
 
   #if ENABLED(NOZZLE_CLEAN_PATTERN_CIRCLE)
     #define NOZZLE_CLEAN_CIRCLE_RADIUS 6.5                      // (mm) Circular pattern radius
