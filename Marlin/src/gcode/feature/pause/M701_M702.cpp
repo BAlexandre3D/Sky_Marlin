@@ -130,6 +130,7 @@ void GcodeSuite::M701() {
   TERN_(MIXING_EXTRUDER, mixer.T(old_mixing_tool)); // Restore original mixing tool
 
   // Show status screen
+  SERIAL_ECHOLNPGM("M701: Load filament complete");
   ui.pause_show_message(PAUSE_MESSAGE_STATUS);
 }
 
@@ -234,6 +235,7 @@ void GcodeSuite::M702() {
   TERN_(MIXING_EXTRUDER, mixer.T(old_mixing_tool)); // Restore original mixing tool
 
   // Show status screen
+  SERIAL_ECHOLNPGM("M702: Unload filament complete");
   ui.pause_show_message(PAUSE_MESSAGE_STATUS);
 }
 
