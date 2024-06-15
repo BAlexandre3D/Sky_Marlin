@@ -113,6 +113,15 @@
   #define Z_MIN_PROBE_PIN                   PF6
 #endif
 
+#if ENABLED(FREEZE_FEATURE)
+  #define FREEZE_PIN PG8   // Override the default (KILL) pin here
+  #define FREEZE_STATE LOW  // State of pin indicating freeze
+#endif
+
+#if ENABLED(PROBE_ENABLE_DISABLE)
+  #define PROBE_ENABLE_PIN PA1   // Override the default pin here
+#endif
+
 //
 // Probe enable
 //

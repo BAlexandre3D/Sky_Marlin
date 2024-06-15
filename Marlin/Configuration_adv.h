@@ -4267,10 +4267,10 @@
  * @section interface
  */
 #define FREEZE_FEATURE
-#if ENABLED(FREEZE_FEATURE)
-  #define FREEZE_PIN PG8   // Override the default (KILL) pin here
-  #define FREEZE_STATE LOW  // State of pin indicating freeze
-#endif
+//#if ENABLED(FREEZE_FEATURE)
+  //#define FREEZE_PIN PG8   // Override the default (KILL) pin here
+  //#define FREEZE_STATE LOW  // State of pin indicating freeze
+//#endif
 
 /**
  * MAX7219 Debug Matrix
