@@ -818,9 +818,9 @@
 #define DUAL_X_CARRIAGE
 #if ENABLED(DUAL_X_CARRIAGE)
   #define X1_MIN_POS X_MIN_POS    // Set to X_MIN_POS
-  #define X1_MAX_POS   250   // A max coordinate so the X1 carriage can't hit the parked X2 carriage
-  #define X2_MIN_POS    80        // A min coordinate so the X2 carriage can't hit the parked X1 carriage
-  #define X2_MAX_POS X_BED_SIZE        // The max position of the X2 carriage, typically also the home position
+  #define X1_MAX_POS   255   // A max coordinate so the X1 carriage can't hit the parked X2 carriage
+  #define X2_MIN_POS    50        // A min coordinate so the X2 carriage can't hit the parked X1 carriage
+  #define X2_MAX_POS X_MAX_POS        // The max position of the X2 carriage, typically also the home position
   #define X2_HOME_POS X2_MAX_POS  // Default X2 home position. Set to X2_MAX_POS.
                                   // NOTE: For Dual X Carriage use M218 T1 Xn to override the X2_HOME_POS.
                                   // This allows recalibration of endstops distance without a rebuild.
@@ -2970,7 +2970,7 @@
 
   #if AXIS_IS_TMC_CONFIG(X)
     #define X_CURRENT       650        // (mA) RMS current. Multiply by 1.414 for peak current.
-    #define X_CURRENT_HOME  600  // (mA) RMS current for sensorless homing
+    #define X_CURRENT_HOME  330  // (mA) RMS current for sensorless homing
     #define X_MICROSTEPS     16        // 0..256
     #define X_RSENSE          0.15
     #define X_CHAIN_POS      -1        // -1..0: Not chained. 1: MCU MOSI connected. 2: Next in chain, ...
@@ -2990,7 +2990,7 @@
 
   #if AXIS_IS_TMC_CONFIG(Y)
     #define Y_CURRENT       650
-    #define Y_CURRENT_HOME  600
+    #define Y_CURRENT_HOME  330
     #define Y_MICROSTEPS     16
     #define Y_RSENSE          0.15
     #define Y_CHAIN_POS      -1
@@ -3409,9 +3409,9 @@
 
   #if ANY(SENSORLESS_HOMING, SENSORLESS_PROBING)
     // TMC2209: 0...255. TMC2130: -64...63
-    #define X_STALL_SENSITIVITY   80
+    #define X_STALL_SENSITIVITY   85
     #define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
-    #define Y_STALL_SENSITIVITY   110
+    #define Y_STALL_SENSITIVITY   85
     #define Y2_STALL_SENSITIVITY Y_STALL_SENSITIVITY
     //#define Z_STALL_SENSITIVITY  8
     //#define Z2_STALL_SENSITIVITY Z_STALL_SENSITIVITY
