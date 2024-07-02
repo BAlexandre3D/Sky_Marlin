@@ -191,6 +191,7 @@
  */
 void GcodeSuite::G28() {
   DEBUG_SECTION(log_G28, "G28", DEBUGGING(LEVELING));
+  if(active_extruder==1) gcode.process_subcommands_now(F("T0"));      
   if (DEBUGGING(LEVELING)) log_machine_info();
 
   #if ENABLED(MARLIN_DEV_MODE)
