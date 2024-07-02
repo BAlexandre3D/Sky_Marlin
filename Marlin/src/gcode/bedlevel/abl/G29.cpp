@@ -221,6 +221,8 @@ public:
 G29_TYPE GcodeSuite::G29() {
 
   DEBUG_SECTION(log_G29, "G29", DEBUGGING(LEVELING));
+  if(active_extruder==1) gcode.process_subcommands_now(F("T0"));      
+
 
   // Leveling state is persistent when done manually with multiple G29 commands
   TERN_(PROBE_MANUALLY, static) G29_State abl;
