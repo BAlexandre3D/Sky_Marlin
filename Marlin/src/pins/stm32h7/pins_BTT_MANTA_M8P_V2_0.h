@@ -226,7 +226,7 @@
 #define HEATER_2_PIN                        PA3   // HE2
 #define HEATER_3_PIN                        PA5   // HE3
 
-#define FAN0_PIN                            PF7   // FAN0 (2 wire)
+#define FAN0_PIN                            PF7   // FAN0 (2 wire) CNC0_FAN
 #if ENABLED(FOURWIRES_FANS)
   // Only FAN5 and FAN6 have tachometer pins, so swap them with FAN1 and FAN2
   #define FAN1_PIN                          PA6   // FAN5 (4 wire)
@@ -234,15 +234,22 @@
   #define FAN5_PIN                          PF9   // FAN1 (2 wire)
   #define FAN6_PIN                          PF6   // FAN2 (2 wire)
 #else
-  #define FAN1_PIN                          PF9   // FAN1 (2 wire)
-  #define FAN2_PIN                          PF6   // FAN2 (2 wire)
+  #define FAN1_PIN                          PF9   // FAN1 (2 wire) CNC1_Fan
+  //#define FAN2_PIN                          PF6   // FAN2 (2 wire)
   #define FAN5_PIN                          PA6   // FAN5 (4 wire)
   #define FAN6_PIN                          PA2   // FAN6 (4 wire)
 #endif
-#define FAN3_PIN                            PF8   // FAN3 (2 wire)
+//#define FAN3_PIN                            PF8   // FAN3 (2 wire)
 #define FAN4_PIN                            PA4   // FAN4 (2 wire)
 #define FAN7_PIN                            PE9   // MOTOR (3 wire)
 //#define FAN8_PIN                          PB11  // "FAN IND" (3 wire) - Shared inductive probe / fan connector
+
+#ifndef E0_AUTO_FAN_PIN
+  #define E0_AUTO_FAN_PIN               PF6
+#endif
+#ifndef E1_AUTO_FAN_PIN
+  #define E1_AUTO_FAN_PIN               PF8
+#endif
 
 #if ENABLED(FOURWIRES_FANS)
   #ifndef E0_FAN_TACHO_PIN
