@@ -1973,11 +1973,11 @@ bool Planner::_populate_block(
     dm.c  = (CORESIGN(dist.b - dist.c) > 0);    // Motor C direction
   #elif ENABLED(MARKFORGED_XY)
     if (extruder == 0) {
-    dm.a = (dist.a TERN(MARKFORGED_INVERSE, -, +) dist.b > 0); // Motor A direction
+    dm.a = (dist.a + dist.b > 0); // Motor A direction
     dm.b = (dist.b > 0);                        // Motor B direction
     }
     else {
-    dm.a = (dist.a TERN(MARKFORGED_INVERSE, +, -) dist.b > 0); // Motor A direction
+    dm.a = (dist.a - dist.b > 0); // Motor A direction
     dm.b = (dist.b > 0);                        // Motor B direction
 		}
     TERN_(HAS_Z_AXIS, dm.z = (dist.c > 0));     // Axis  Z direction
@@ -2044,6 +2044,7 @@ bool Planner::_populate_block(
 
   // Number of steps for each axis
   // See https://www.corexy.com/theory.html
+  if (extruder == 0) {
   block->steps.set(NUM_AXIS_LIST(
     #if CORE_IS_XY
       ABS(dist.a + dist.b), ABS(dist.a - dist.b), ABS(dist.c)
@@ -2052,7 +2053,8 @@ bool Planner::_populate_block(
     #elif CORE_IS_YZ
       ABS(dist.a), ABS(dist.b + dist.c), ABS(dist.b - dist.c)
     #elif ENABLED(MARKFORGED_XY)
-      ABS(dist.a TERN(MARKFORGED_INVERSE, -, +) dist.b), ABS(dist.b), ABS(dist.c)
+    ABS(dist.a TERN(MARKFORGED_INVERSE, -, +) dist.b), ABS(dist.b), ABS(dist.c)
+      
     #elif ENABLED(MARKFORGED_YX)
       ABS(dist.a), ABS(dist.b TERN(MARKFORGED_INVERSE, -, +) dist.a), ABS(dist.c)
     #elif IS_SCARA
@@ -2062,6 +2064,28 @@ bool Planner::_populate_block(
     #endif
     , ABS(dist.i), ABS(dist.j), ABS(dist.k), ABS(dist.u), ABS(dist.v), ABS(dist.w)
   ));
+  }
+  else {
+    block->steps.set(NUM_AXIS_LIST(
+    #if CORE_IS_XY
+      ABS(dist.a + dist.b), ABS(dist.a - dist.b), ABS(dist.c)
+    #elif CORE_IS_XZ
+      ABS(dist.a + dist.c), ABS(dist.b), ABS(dist.a - dist.c)
+    #elif CORE_IS_YZ
+      ABS(dist.a), ABS(dist.b + dist.c), ABS(dist.b - dist.c)
+    #elif ENABLED(MARKFORGED_XY)
+    ABS(dist.a TERN(MARKFORGED_INVERSE, +, -) dist.b), ABS(dist.b), ABS(dist.c)
+      
+    #elif ENABLED(MARKFORGED_YX)
+      ABS(dist.a), ABS(dist.b TERN(MARKFORGED_INVERSE, -, +) dist.a), ABS(dist.c)
+    #elif IS_SCARA
+      ABS(dist.a), ABS(dist.b), ABS(dist.c)
+    #else // default non-h-bot planning
+      ABS(dist.a), ABS(dist.b), ABS(dist.c)
+    #endif
+    , ABS(dist.i), ABS(dist.j), ABS(dist.k), ABS(dist.u), ABS(dist.v), ABS(dist.w)
+  ));
+  }
 
   /**
    * This part of the code calculates the total length of the movement.
@@ -2098,8 +2122,14 @@ bool Planner::_populate_block(
     dist_mm.b      = (dist.b + dist.c) * mm_per_step[B_AXIS];
     dist_mm.c      = CORESIGN(dist.b - dist.c) * mm_per_step[C_AXIS];
   #elif ENABLED(MARKFORGED_XY)
+  if (extruder == 0) {
     dist_mm.a = (dist.a TERN(MARKFORGED_INVERSE, +, -) dist.b) * mm_per_step[A_AXIS];
     dist_mm.b = dist.b * mm_per_step[B_AXIS];
+  }
+  else {
+    dist_mm.a = (dist.a TERN(MARKFORGED_INVERSE, -, +) dist.b) * mm_per_step[A_AXIS];
+    dist_mm.b = dist.b * mm_per_step[B_AXIS];
+  }
   #elif ENABLED(MARKFORGED_YX)
     dist_mm.a = dist.a * mm_per_step[A_AXIS];
     dist_mm.b = (dist.b TERN(MARKFORGED_INVERSE, +, -) dist.a) * mm_per_step[B_AXIS];
