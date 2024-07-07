@@ -1973,11 +1973,11 @@ bool Planner::_populate_block(
     dm.c  = (CORESIGN(dist.b - dist.c) > 0);    // Motor C direction
   #elif ENABLED(MARKFORGED_XY)
     if (extruder == 0) {
-    dm.a = (dist.a + dist.b > 0); // Motor A direction
+    dm.a = (dist.a TERN(MARKFORGED_INVERSE, +, -) dist.b > 0); // Motor A direction
     dm.b = (dist.b > 0);                        // Motor B direction
     }
     else {
-    dm.a = (dist.a - dist.b > 0); // Motor A direction
+    dm.a = (dist.a TERN(MARKFORGED_INVERSE, -, +) dist.b > 0); // Motor A direction
     dm.b = (dist.b > 0);                        // Motor B direction
 		}
     TERN_(HAS_Z_AXIS, dm.z = (dist.c > 0));     // Axis  Z direction
@@ -2054,7 +2054,6 @@ bool Planner::_populate_block(
       ABS(dist.a), ABS(dist.b + dist.c), ABS(dist.b - dist.c)
     #elif ENABLED(MARKFORGED_XY)
     ABS(dist.a TERN(MARKFORGED_INVERSE, -, +) dist.b), ABS(dist.b), ABS(dist.c)
-      
     #elif ENABLED(MARKFORGED_YX)
       ABS(dist.a), ABS(dist.b TERN(MARKFORGED_INVERSE, -, +) dist.a), ABS(dist.c)
     #elif IS_SCARA
@@ -2075,7 +2074,6 @@ bool Planner::_populate_block(
       ABS(dist.a), ABS(dist.b + dist.c), ABS(dist.b - dist.c)
     #elif ENABLED(MARKFORGED_XY)
     ABS(dist.a TERN(MARKFORGED_INVERSE, +, -) dist.b), ABS(dist.b), ABS(dist.c)
-      
     #elif ENABLED(MARKFORGED_YX)
       ABS(dist.a), ABS(dist.b TERN(MARKFORGED_INVERSE, -, +) dist.a), ABS(dist.c)
     #elif IS_SCARA
