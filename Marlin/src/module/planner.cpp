@@ -1973,11 +1973,11 @@ bool Planner::_populate_block(
     dm.c  = (CORESIGN(dist.b - dist.c) > 0);    // Motor C direction
   #elif ENABLED(MARKFORGED_XY)
     if (extruder == 0) {
-    dm.a = (dist.a TERN(MARKFORGED_INVERSE, +, -) dist.b > 0); // Motor A direction
+    dm.a = (dist.a TERN(MARKFORGED_INVERSE, -, +) dist.b > 0); // Motor A direction
     dm.b = (dist.b > 0);                        // Motor B direction
     }
     else {
-    dm.a = (dist.a TERN(MARKFORGED_INVERSE, -, +) dist.b > 0); // Motor A direction
+    dm.a = (dist.a TERN(MARKFORGED_INVERSE, +, -) dist.b > 0); // Motor A direction
     dm.b = (dist.b > 0);                        // Motor B direction
 		}
     TERN_(HAS_Z_AXIS, dm.z = (dist.c > 0));     // Axis  Z direction
@@ -2121,11 +2121,11 @@ bool Planner::_populate_block(
     dist_mm.c      = CORESIGN(dist.b - dist.c) * mm_per_step[C_AXIS];
   #elif ENABLED(MARKFORGED_XY)
   if (extruder == 0) {
-    dist_mm.a = (dist.a TERN(MARKFORGED_INVERSE, +, -) dist.b) * mm_per_step[A_AXIS];
+    dist_mm.a = (dist.a TERN(MARKFORGED_INVERSE, -, +) dist.b) * mm_per_step[A_AXIS];
     dist_mm.b = dist.b * mm_per_step[B_AXIS];
   }
   else {
-    dist_mm.a = (dist.a TERN(MARKFORGED_INVERSE, -, +) dist.b) * mm_per_step[A_AXIS];
+    dist_mm.a = (dist.a TERN(MARKFORGED_INVERSE, +, -) dist.b) * mm_per_step[A_AXIS];
     dist_mm.b = dist.b * mm_per_step[B_AXIS];
   }
   #elif ENABLED(MARKFORGED_YX)
