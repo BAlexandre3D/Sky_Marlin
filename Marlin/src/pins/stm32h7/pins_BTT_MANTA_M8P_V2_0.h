@@ -481,4 +481,4 @@
 #endif
 
 #define LCD_CONTRAST_DEFAULT                 255
-#define LCD_SCREEN_ROTATE                    180
+#define LCD_SCREEN_ROTATE                    0
