@@ -119,7 +119,7 @@
     #define Z_MAX_PIN                E2_DIAG_PIN  // M6-STOP
   #endif
 #else
-  #define Z_STOP_PIN                  Z_DIAG_PIN  // M3-STOP
+  #define Z_STOP_PIN                  Y_DIAG_PIN  // M3-STOP
 #endif
 
 //
