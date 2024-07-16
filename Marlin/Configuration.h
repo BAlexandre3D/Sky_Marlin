@@ -362,9 +362,9 @@
 // Offset of the extruders (uncomment if using more than one and relying on firmware to position when changing).
 // The offset has to be X=0, Y=0 for the extruder 0 hotend (default extruder).
 // For the other hotends it is their distance from the extruder 0 hotend.
-#define HOTEND_OFFSET_X { 0.0, 5.50 } // (mm) relative X-offset for each nozzle Measure 356.50
+#define HOTEND_OFFSET_X { 0.0, 3.90 } // (mm) relative X-offset for each nozzle Last 5.50
 #define HOTEND_OFFSET_Y { 0.0, 0.70 }  // (mm) relative Y-offset for each nozzle
-#define HOTEND_OFFSET_Z { 0.0, -1.40 }  // (mm) relative Z-offset for each nozzle
+#define HOTEND_OFFSET_Z { 0.0, -1.20 }  // (mm) relative Z-offset for each nozzle
 
 // @section multi-material
 
@@ -1581,7 +1581,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 61, -20, -0.30 }
+#define NOZZLE_TO_PROBE_OFFSET { 61, -20, -0.20 }
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
