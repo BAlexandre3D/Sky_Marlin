@@ -815,7 +815,7 @@
  *       Set the initial X offset and temperature differential with M605 S2 X[offs] R[deg] and
  *       follow with M605 S3 to initiate mirrored movement.
  */
-#define DUAL_X_CARRIAGE
+//#define DUAL_X_CARRIAGE
 #if ENABLED(DUAL_X_CARRIAGE)
   #define X1_MIN_POS X_MIN_POS    // Set to X_MIN_POS
   #define X1_MAX_POS   255   // A max coordinate so the X1 carriage can't hit the parked X2 carriage
@@ -868,7 +868,7 @@
 #endif
 
 #if HAS_Y2_STEPPER
-  //#define INVERT_Y2_VS_Y_DIR        // Y2 direction signal is the opposite of Y
+  #define INVERT_Y2_VS_Y_DIR        // Y2 direction signal is the opposite of Y
   #define Y_DUAL_ENDSTOPS           // Y2 has its own endstop
   #if ENABLED(Y_DUAL_ENDSTOPS)
     //#define Y2_STOP_PIN Y_MAX_PIN   // Y2 endstop pin override
@@ -3237,7 +3237,7 @@
   #define  Y_SLAVE_ADDRESS 0
   #define  Z_SLAVE_ADDRESS 0
   //#define X2_SLAVE_ADDRESS 0
-  //#define Y2_SLAVE_ADDRESS 0
+  #define Y2_SLAVE_ADDRESS 0
   #define Z2_SLAVE_ADDRESS 0
   #define Z3_SLAVE_ADDRESS 0
   #define Z4_SLAVE_ADDRESS 0
@@ -3249,7 +3249,7 @@
   //#define  W_SLAVE_ADDRESS 0
   #define E0_SLAVE_ADDRESS 0
   #define E1_SLAVE_ADDRESS 0
-  #define E2_SLAVE_ADDRESS 0
+  //#define E2_SLAVE_ADDRESS 0
   //#define E3_SLAVE_ADDRESS 0
   //#define E4_SLAVE_ADDRESS 0
   //#define E5_SLAVE_ADDRESS 0
@@ -3300,7 +3300,7 @@
    * Define your own with:
    * { <off_time[1..15]>, <hysteresis_end[-3..12]>, hysteresis_start[1..8] }
    */
-  #define CHOPPER_TIMING CHOPPER_DEFAULT_12V        // All axes (override below)
+  #define CHOPPER_TIMING CHOPPER_DEFAULT_24V        // All axes (override below)
   //#define CHOPPER_TIMING_X  CHOPPER_TIMING        // For X Axes (override below)
   //#define CHOPPER_TIMING_X2 CHOPPER_TIMING_X
   //#define CHOPPER_TIMING_Y  CHOPPER_TIMING        // For Y Axes (override below)
@@ -4266,7 +4266,7 @@
  * Note this does NOT pause spindles, lasers, fans, heaters or any other auxiliary device.
  * @section interface
  */
-#define FREEZE_FEATURE
+//#define FREEZE_FEATURE
 //#if ENABLED(FREEZE_FEATURE)
   //#define FREEZE_PIN PG8   // Override the default (KILL) pin here
   //#define FREEZE_STATE LOW  // State of pin indicating freeze
