@@ -50,11 +50,11 @@
 //
 #define X_DIAG_PIN                          PF0   // M1-STOP
 #define Y_DIAG_PIN                          PF2   // M2-STOP
-#define Z_DIAG_PIN                          PF4   // M3-STOP
-#define Z2_DIAG_PIN                         PF3   // M4-DET
-#define E0_DIAG_PIN                         PF1   // M5-DET
-#define E1_DIAG_PIN                         PC15  // M6-DET
-#define E2_DIAG_PIN                         PF12  // PWRDET
+#define Y2_DIAG_PIN                          PF4   // M3-STOP
+#define Z_DIAG_PIN                         PF3   // M4-DET
+#define Z1_DIAG_PIN                         PF1   // M5-DET
+#define Z2_DIAG_PIN                         PC15  // M6-DET
+#define Z3_DIAG_PIN                         PF12  // PWRDET
 
 //
 // Limit Switches
@@ -62,16 +62,16 @@
 #ifdef X_STALL_SENSITIVITY
   #define X_STOP_PIN                  X_DIAG_PIN
   #if X_HOME_TO_MIN
-    #define X_MAX_PIN                E0_DIAG_PIN  // M4-DET
+    #define X_MAX_PIN                Z_DIAG_PIN  // M4-DET
   #else
-    #define X_MIN_PIN                E0_DIAG_PIN  // M4-DET
+    #define X_MIN_PIN                Z_DIAG_PIN  // M4-DET
   #endif
 #elif NEEDS_X_MINMAX
   #ifndef X_MIN_PIN
     #define X_MIN_PIN                 X_DIAG_PIN  // X-STOP
   #endif
   #ifndef X_MAX_PIN
-    #define X_MAX_PIN                E0_DIAG_PIN  // M4-DET
+    #define X_MAX_PIN                Z_DIAG_PIN  // M4-DET
   #endif
 #else
   #define X_STOP_PIN                  X_DIAG_PIN  // X-STOP
@@ -82,35 +82,35 @@
   #if Y_HOME_TO_MIN
     #define Y_MAX_PIN                E1_DIAG_PIN  // M5-DET
   #else
-    #define Y_MIN_PIN                E1_DIAG_PIN  // M5-DET
+    #define Y_MIN_PIN                Z1_DIAG_PIN  // M5-DET
   #endif
 #elif NEEDS_Y_MINMAX
   #ifndef Y_MIN_PIN
     #define Y_MIN_PIN                 Y_DIAG_PIN  // Y-STOP
   #endif
   #ifndef Y_MAX_PIN
-    #define Y_MAX_PIN                E1_DIAG_PIN  // M5-DET
+    #define Y_MAX_PIN                Z1_DIAG_PIN  // M5-DET
   #endif
 #else
   #define Y_STOP_PIN                  Y_DIAG_PIN  // Y-STOP
 #endif
 
 #ifdef Z_STALL_SENSITIVITY
-  #define Z_STOP_PIN                  Z_DIAG_PIN
+  #define Z_STOP_PIN                  Y2_DIAG_PIN
   #if Z_HOME_TO_MIN
-    #define Z_MAX_PIN                E2_DIAG_PIN  // PWRDET
+    #define Z_MAX_PIN                Z3_DIAG_PIN  // PWRDET
   #else
-    #define Z_MIN_PIN                E2_DIAG_PIN  // PWRDET
+    #define Z_MIN_PIN                Z3_DIAG_PIN  // PWRDET
   #endif
 #elif NEEDS_Z_MINMAX
   #ifndef Z_MIN_PIN
-    #define Z_MIN_PIN                 Z_DIAG_PIN  // Z-STOP
+    #define Z_MIN_PIN                 Y2_DIAG_PIN  // Z-STOP
   #endif
   #ifndef Z_MAX_PIN
-    #define Z_MAX_PIN                E2_DIAG_PIN  // PWRDET
+    #define Z_MAX_PIN                Z3_DIAG_PIN  // PWRDET
   #endif
 #else
-  #define Z_STOP_PIN                  Z_DIAG_PIN  // Z-STOP
+  #define Z_STOP_PIN                  Y2_DIAG_PIN  // Z-STOP
 #endif
 
 //
@@ -150,60 +150,60 @@
   #define Y_CS_PIN                          PG13
 #endif
 
-#define Z_STEP_PIN                          PE1   // MOTOR 3
-#define Z_DIR_PIN                           PE0
-#define Z_ENABLE_PIN                        PE2
+#define Y2_STEP_PIN                          PE1   // MOTOR 3
+#define Y2_DIR_PIN                           PE0
+#define Y2_ENABLE_PIN                        PE2
+#ifndef Y2_CS_PIN
+  #define Y2_CS_PIN                          PG12
+#endif
+
+#define Z_STEP_PIN                         PB8   // MOTOR 4
+#define Z_DIR_PIN                          PB9
+#define Z_ENABLE_PIN                       PB7
 #ifndef Z_CS_PIN
-  #define Z_CS_PIN                          PG12
+  #define Z_CS_PIN                         PG11
 #endif
 
-#define Z2_STEP_PIN                         PB8   // MOTOR 4
-#define Z2_DIR_PIN                          PB9
-#define Z2_ENABLE_PIN                       PB7
+#define Z2_STEP_PIN                         PB5   // MOTOR 5
+#define Z2_DIR_PIN                          PB4
+#define Z2_ENABLE_PIN                       PB6
 #ifndef Z2_CS_PIN
-  #define Z2_CS_PIN                         PG11
+  #define Z2_CS_PIN                         PG10
 #endif
 
-#define E0_STEP_PIN                         PB5   // MOTOR 5
-#define E0_DIR_PIN                          PB4
-#define E0_ENABLE_PIN                       PB6
+#define Z3_STEP_PIN                         PG15  // MOTOR 6
+#define Z3_DIR_PIN                          PB3
+#define Z3_ENABLE_PIN                       PD5
+#ifndef Z3_CS_PIN
+  #define Z3_CS_PIN                         PG9
+#endif
+
+#define Z4_STEP_PIN                         PD3   // MOTOR 7
+#define Z4_DIR_PIN                          PD2
+#define Z4_ENABLE_PIN                       PD4
+#ifndef Z4_CS_PIN
+  #define Z4_CS_PIN                         PD7
+#endif
+
+#define E0_STEP_PIN                         PA10  // MOTOR 8
+#define E0_DIR_PIN                          PA9
+#define E0_ENABLE_PIN                       PA15
 #ifndef E0_CS_PIN
-  #define E0_CS_PIN                         PG10
+  #define E0_CS_PIN                         PD6
 #endif
 
-#define E1_STEP_PIN                         PG15  // MOTOR 6
-#define E1_DIR_PIN                          PB3
-#define E1_ENABLE_PIN                       PD5
+#define E1_STEP_PIN                         PA8   // MOTOR 9
+#define E1_DIR_PIN                          PC7
+#define E1_ENABLE_PIN                       PC9
 #ifndef E1_CS_PIN
-  #define E1_CS_PIN                         PG9
+  #define E1_CS_PIN                         PG8
 #endif
 
-#define E2_STEP_PIN                         PD3   // MOTOR 7
-#define E2_DIR_PIN                          PD2
-#define E2_ENABLE_PIN                       PD4
+#define E2_STEP_PIN                         PG6   // MOTOR 10
+#define E2_DIR_PIN                          PC6
+#define E2_ENABLE_PIN                       PC8
 #ifndef E2_CS_PIN
-  #define E2_CS_PIN                         PD7
-#endif
-
-#define E3_STEP_PIN                         PA10  // MOTOR 8
-#define E3_DIR_PIN                          PA9
-#define E3_ENABLE_PIN                       PA15
-#ifndef E3_CS_PIN
-  #define E3_CS_PIN                         PD6
-#endif
-
-#define E4_STEP_PIN                         PA8   // MOTOR 9
-#define E4_DIR_PIN                          PC7
-#define E4_ENABLE_PIN                       PC9
-#ifndef E4_CS_PIN
-  #define E4_CS_PIN                         PG8
-#endif
-
-#define E5_STEP_PIN                         PG6   // MOTOR 10
-#define E5_DIR_PIN                          PC6
-#define E5_ENABLE_PIN                       PC8
-#ifndef E5_CS_PIN
-  #define E5_CS_PIN                         PG7
+  #define E2_CS_PIN                         PG7
 #endif
 
 //
@@ -224,7 +224,7 @@
 #define HEATER_2_PIN                        PF9   // Heater2
 #define HEATER_3_PIN                        PF7   // Heater3
 
-#define FAN0_PIN                            PA6   // Fan0
+#define E0_AUTO_FAN_PIN                     PA6   // Fan0
 #define FAN1_PIN                            PA5   // Fan1
 #define FAN2_PIN                            PA4   // Fan2
 #define FAN3_PIN                            PA3   // Fan3
@@ -306,29 +306,29 @@
   #define Y_SERIAL_TX_PIN                   PG13
   #define Y_SERIAL_RX_PIN        Y_SERIAL_TX_PIN
 
-  #define Z_SERIAL_TX_PIN                   PG12
-  #define Z_SERIAL_RX_PIN        Z_SERIAL_TX_PIN
+  #define Y2_SERIAL_TX_PIN                   PG12
+  #define Y2_SERIAL_RX_PIN        Y2_SERIAL_TX_PIN
 
-  #define Z2_SERIAL_TX_PIN                  PG11
+  #define Z_SERIAL_TX_PIN                  PG11
+  #define Z_SERIAL_RX_PIN      Z_SERIAL_TX_PIN
+
+  #define Z2_SERIAL_TX_PIN                  PG10
   #define Z2_SERIAL_RX_PIN      Z2_SERIAL_TX_PIN
 
-  #define E0_SERIAL_TX_PIN                  PG10
+  #define Z3_SERIAL_TX_PIN                  PG9
+  #define Z3_SERIAL_RX_PIN      Z3_SERIAL_TX_PIN
+
+  #define Z4_SERIAL_TX_PIN                  PD7
+  #define Z4_SERIAL_RX_PIN      Z4_SERIAL_TX_PIN
+
+  #define E0_SERIAL_TX_PIN                  PD6
   #define E0_SERIAL_RX_PIN      E0_SERIAL_TX_PIN
 
-  #define E1_SERIAL_TX_PIN                  PG9
-  #define E1_SERIAL_RX_PIN      E1_SERIAL_TX_PIN
+  #define E1_SERIAL_TX_PIN                  PG8
+  #define E1_SERIAL_RX_PIN      E0_SERIAL_TX_PIN
 
-  #define E2_SERIAL_TX_PIN                  PD7
-  #define E2_SERIAL_RX_PIN      E2_SERIAL_TX_PIN
-
-  #define E3_SERIAL_TX_PIN                  PD6
-  #define E3_SERIAL_RX_PIN      E3_SERIAL_TX_PIN
-
-  #define E4_SERIAL_TX_PIN                  PG8
-  #define E4_SERIAL_RX_PIN      E3_SERIAL_TX_PIN
-
-  #define E5_SERIAL_TX_PIN                  PG7
-  #define E5_SERIAL_RX_PIN      E3_SERIAL_TX_PIN
+  #define E2_SERIAL_TX_PIN                  PG7
+  #define E2_SERIAL_RX_PIN      E0_SERIAL_TX_PIN
 
   // Reduce baud rate to improve software serial reliability
   #ifndef TMC_BAUD_RATE
