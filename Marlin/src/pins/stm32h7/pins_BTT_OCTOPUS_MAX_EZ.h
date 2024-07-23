@@ -225,12 +225,12 @@
 #define HEATER_3_PIN                        PF7   // Heater3
 
 #define E0_AUTO_FAN_PIN                     PA6   // Fan0
-#define FAN1_PIN                            PA5   // Fan1
-#define FAN2_PIN                            PA4   // Fan2
-#define FAN3_PIN                            PA3   // Fan3
-#define FAN4_PIN                            PA1   // 4 wire Fan4
-#define FAN5_PIN                            PF8   // 4 wire Fan5
-#define FAN6_PIN                            PA2   // 4 wire Fan6
+#define FAN0_PIN                            PA5   // Fan1
+#define FAN1_PIN                            PA4   // Fan2
+#define FAN2_PIN                            PA3   // Fan3
+#define FAN3_PIN                            PA1   // 4 wire Fan4
+#define FAN4_PIN                            PF8   // 4 wire Fan5
+#define FAN5_PIN                            PA2   // 4 wire Fan6
 
 //
 // Power Supply Control
