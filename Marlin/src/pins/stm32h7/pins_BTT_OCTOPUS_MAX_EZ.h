@@ -130,7 +130,7 @@
 //
 // Filament Runout Sensor
 //
-#define FIL_RUNOUT_PIN                      PF1   // M5-DET
+#define FIL_RUNOUT_PIN                      PA7  
 #define FIL_RUNOUT2_PIN                     PC15  // M6-DET
 
 //
@@ -213,7 +213,8 @@
 #define TEMP_0_PIN                          PB0   // TH0
 #define TEMP_1_PIN                          PC5   // TH1
 #define TEMP_2_PIN                          PC4   // TH2
-#define TEMP_3_PIN                          PA7   // TH3
+#define TEMP_CHAMBER_PIN                    TEMP_BED_PIN
+//#define TEMP_3_PIN                          PA7   // TH3
 
 //
 // Heaters / Fans
@@ -224,9 +225,9 @@
 #define HEATER_2_PIN                        PF9   // Heater2
 #define HEATER_3_PIN                        PF7   // Heater3
 
-#define E0_AUTO_FAN_PIN                     PA6   // Fan0
+#define E0_AUTO_FAN_PIN                     PA4   // Fan0
 #define FAN0_PIN                            PA5   // Fan1
-#define FAN1_PIN                            PA4   // Fan2
+//#define FAN1_PIN                            PA4   // Fan2
 #define FAN2_PIN                            PA3   // Fan3
 #define FAN3_PIN                            PA1   // 4 wire Fan4
 #define FAN4_PIN                            PF8   // 4 wire Fan5
